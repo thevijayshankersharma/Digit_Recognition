@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.light-mode {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.light-mode .MuiPaper-root {
+  background-color: white !important;
+  color: #000000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode .MuiPaper-root {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.input-section, .result-section, .predictions-section {
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.input-section:hover, .result-section:hover, .predictions-section:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.canvas-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.drawing-canvas {
+  background-color: #000000;
+  border: 2px solid #ffffff;
+  cursor: crosshair;
+  border-radius: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.dark-mode .drawing-canvas {
+  border-color: #ffffff;
+}
+
+.light-mode .drawing-canvas {
+  border-color: #000000;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.predictions-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.prediction-item {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.light-mode .prediction-item {
+  background-color: #e0e0e0;
+  color: #000000;
+  border: 1px solid #bdbdbd;
+}
+
+.dark-mode .prediction-item {
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #555555;
+}
+
+.prediction-item:hover {
+  transform: scale(1.1);
+}
+
+.MuiTypography-h2 {
+  margin-bottom: 30px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.MuiButton-root {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.MuiButton-root:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

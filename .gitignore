@@ -1,0 +1,34 @@
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+
+# TensorFlow model files (adjust if you're using different model names)
+digit_recognition_model.h5
+
+# Logs
+*.log
+
+# Node.js dependencies (for your frontend React app)
+node_modules/
+
+# Build output from React (frontend build)
+frontend/build/
+
+# IDE and editor files (for example, VSCode)
+.vscode/
+.idea/
+*.swp
+
+# OS-specific files
+.DS_Store         # macOS Finder
+Thumbs.db         # Windows Explorer
+
+# Miscellaneous files
+*.bak
+*.tmp

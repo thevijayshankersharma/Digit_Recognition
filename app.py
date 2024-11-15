@@ -29,16 +29,14 @@ except Exception as e:
 # Initialize Flask app
 app = Flask(__name__, static_folder='frontend/build')
 
-CORS(app)  # This will allow requests from any origin for debugging purposes.
+CORS(app)  # Allow requests from any origin (good for debugging)
 
 def prepare_image(image):
+    """Preprocess image for model input"""
     try:
-        # Convert the image to grayscale and resize to 28x28 pixels
-        image = image.convert("L").resize((28, 28))
-        # Convert the image to an array and normalize
-        image = img_to_array(image) / 255.0
-        # Add a batch dimension
-        image = np.expand_dims(image, axis=0)
+        image = image.convert("L").resize((28, 28))  # Grayscale and resize
+        image = img_to_array(image) / 255.0  # Normalize
+        image = np.expand_dims(image, axis=0)  # Add batch dimension
         return image
     except Exception as e:
         logger.error(f"Error in prepare_image: {str(e)}")
@@ -46,6 +44,7 @@ def prepare_image(image):
 
 @app.route("/predict", methods=["POST"])
 def predict():
+    """Predict digit from the given image"""
     logger.info("Received request on /predict")
     data = request.get_json()
     logger.info(f"Received data: {data}")
@@ -53,9 +52,6 @@ def predict():
     if not data or 'image' not in data:
         logger.error("No image data provided")
         return jsonify({"error": "No image data provided"}), 400
-
-    # rest of your prediction code...
-
 
     try:
         # Decode the base64 image
@@ -70,7 +66,7 @@ def predict():
         digit = np.argmax(prediction)
         confidence = float(prediction[0][digit])
 
-        logger.info(f"Prediction made: digit {digit} with confidence {confidence:.2f}")
+        logger.info(f"Prediction: digit {digit} with confidence {confidence:.2f}")
 
         return jsonify({
             "digit": int(digit),
@@ -84,6 +80,7 @@ def predict():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
+    """Serve static files or index.html"""
     if path != "" and os.path.exists(app.static_folder + '/' + path):
         return send_from_directory(app.static_folder, path)
     else:
@@ -98,5 +95,4 @@ def internal_error(error):
     logger.error(f"Internal server error: {str(error)}")
     return jsonify({"error": "Internal server error"}), 500
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
+# For deployment environments like Render, Flask's built-in server is replaced by Gunicorn, so app.run() can be omitted.

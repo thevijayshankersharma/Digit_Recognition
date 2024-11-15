@@ -55,19 +55,19 @@ def predict():
 
     try:
         # Decode the base64 image
-        image_data = base64.b64decode(data['image'].split(',')[1])
-        image = Image.open(io.BytesIO(image_data))
+        image_data = base64.b64decode(data['image'].split(',')[1])  # Strip base64 header
+        image = Image.open(io.BytesIO(image_data))  # Open the image
         
-        # Prepare the image
+        # Prepare the image (grayscale, resize, normalize)
         processed_image = prepare_image(image)
-        
+
         # Get model prediction
         prediction = model.predict(processed_image)
         digit = np.argmax(prediction)
         confidence = float(prediction[0][digit])
-        
+
         logger.info(f"Prediction made: digit {digit} with confidence {confidence:.2f}")
-        
+
         return jsonify({
             "digit": int(digit),
             "confidence": confidence,

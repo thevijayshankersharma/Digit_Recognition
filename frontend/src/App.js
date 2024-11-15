@@ -94,15 +94,19 @@ function App() {
     setIsLoading(true);
     setStatus('Predicting...');
     const canvas = canvasRef.current;
-    const imageData = canvas.toDataURL('image/png');
+    const imageData = canvas.toDataURL('image/png');  // This converts the canvas to base64 image
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image: imageData }),
+        body: JSON.stringify({ image: imageData }),  // Send base64 image as part of the request
       });
       const result = await response.json();
-      updatePrediction(result.digit, result.probabilities);
+      if (result.digit !== undefined) {
+        updatePrediction(result.digit, result.probabilities);
+      } else {
+        setStatus('Error: No prediction returned.');
+      }
     } catch (error) {
       console.error('Error:', error);
       setStatus('Error: Unable to predict. Please try again.');

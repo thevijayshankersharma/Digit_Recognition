@@ -8,9 +8,6 @@ __pycache__/
 venv/
 .venv/
 
-# TensorFlow model files (adjust if you're using different model names)
-digit_recognition_model.h5
-
 # Logs
 *.log
 

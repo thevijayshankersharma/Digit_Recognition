@@ -9,7 +9,7 @@ venv/
 .venv/
 
 # Logs
-*.log
+
 
 # Node.js dependencies (for your frontend React app)
 node_modules/

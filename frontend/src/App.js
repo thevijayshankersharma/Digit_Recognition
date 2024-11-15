@@ -8,7 +8,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const API_URL = 'http://localhost:5000/predict'; // Replace with your actual API endpoint
+const API_URL = 'http://localhost:5000/predict';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);

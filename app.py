@@ -28,7 +28,9 @@ except Exception as e:
 
 # Initialize Flask app
 app = Flask(__name__, static_folder='frontend/build')
-CORS(app)  # Enable CORS for all routes
+
+# Enable CORS for the entire app (or specify the frontend URL in the resource section)
+CORS(app, resources={r"/predict": {"origins": "https://digit-recognition-orpin.vercel.app"}})
 
 def prepare_image(image):
     try:

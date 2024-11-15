@@ -29,8 +29,7 @@ except Exception as e:
 # Initialize Flask app
 app = Flask(__name__, static_folder='frontend/build')
 
-# Enable CORS for the entire app (or specify the frontend URL in the resource section)
-CORS(app, resources={r"/predict": {"origins": "https://digit-recognition-orpin.vercel.app"}})
+CORS(app)  # This will allow requests from any origin for debugging purposes.
 
 def prepare_image(image):
     try:
@@ -47,11 +46,16 @@ def prepare_image(image):
 
 @app.route("/predict", methods=["POST"])
 def predict():
+    logger.info("Received request on /predict")
     data = request.get_json()
+    logger.info(f"Received data: {data}")
 
     if not data or 'image' not in data:
         logger.error("No image data provided")
         return jsonify({"error": "No image data provided"}), 400
+
+    # rest of your prediction code...
+
 
     try:
         # Decode the base64 image
